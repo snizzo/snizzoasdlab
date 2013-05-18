@@ -1,17 +1,19 @@
 #ifndef QUEUE_HPP
 #define QUEUE_HPP
 
-#include <list>
-using namespace std;
 
-template <class T>
 class Queue {
 	private:
-		list <T> queue_data;
+		int size;
+		int * data;
 		
 	public:
-		bool enqueue(T data);
-		T dequeue();
+		Queue();
+		int at(int pos);
+		bool empty();
+		int getSize();
+		bool enqueue(int n);
+		int dequeue();
 };
 
 #endif

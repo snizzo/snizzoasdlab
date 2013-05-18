@@ -2,23 +2,22 @@
 using namespace std;
 
 #include "stack.hpp"
+#include "queue.hpp"
+#include "set.hpp"
+#include "vector.hpp"
 
 int main()
 {
+	Vector v;
 	
-	Stack <int> s;
+	v.add(1);
+	v.add(2);
+	v.add(3);
+	v.add(4);
+	v.add(5);
+	v.add(6);
 	
-	s.push(6);
-	s.push(5);
-	s.push(11);
-	s.push(18);
-	
-	cout << s.pop() << "\n";
-	cout << s.pop() << "\n";
-	cout << s.pop() << "\n";
-	cout << s.pop() << "\n";
-	
-	
+	v.print_data();
 	
 	return 0;
 }

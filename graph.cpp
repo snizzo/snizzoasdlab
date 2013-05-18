@@ -14,6 +14,11 @@ void Graph::setData()
 	this->connections[3][3] = 0;
 }
 
+int * Graph::adj(int n)
+{
+	
+}
+
 void Graph::bfs(int n)
 {
 	for(int i=0; i<4; i++){
@@ -26,10 +31,10 @@ void Graph::bfs(int n)
 	color[n] = 'g';
 	d[n] = 0;
 	pi[n] = n;
-	this->q->add(n)
+	this->q->enqueue(n);
 	
 	while(!q->empty()){
-		//
+		int u = this->q->at(0);
 	}
 	
 }

@@ -1,17 +1,16 @@
 #ifndef STACK_HPP
 #define STACK_HPP
 
-#include <vector>
-using namespace std;
-
-template <class T>
 class Stack {
 	private:
-		vector <T> stack_data;
+		int size;
+		int * data;
 		
 	public:
-		bool push(T data);
-		T pop();
+		Stack();
+		int getSize();
+		bool push(int n);
+		int pop();
 };
 
 #endif
