@@ -2,7 +2,11 @@
 #include "vector.hpp"
 #include <iostream>
 #include <cstdlib>
+#include <cstring>
 
+/*
+ * Setting default starting value.
+ */
 Vector::Vector()
 {
 	this->data = NULL;
@@ -24,14 +28,35 @@ void Vector::add(int n)
 	this->data[this->size-1] = n;
 }
 
+/*
+ * Overloaded function that add an element in desired position at pos
+ * 
+ */
 void Vector::add(int n, int pos)
 {
-	//
+	int segment = this->size-pos;
+	//incrementing internal pointer
+	this->size += 1;
+	//reallocating in order to fit
+	this->data = (int *) realloc(this->data, this->size*sizeof(int));
+	//moving everything to make the new space fit
+	memmove(&this->data[pos+1], &this->data[pos], segment*sizeof(int));
+	//inserting new element into array
+	this->data[pos] = n;
 }
 
+/*
+ * This function removes the specified element in position pos
+ */
 void Vector::remove(int pos)
 {
-	//
+	int segment = this->size-pos;
+	
+	memmove(&this->data[pos], &this->data[pos+1], segment*sizeof(int));	
+	
+	this->size -= 1;
+	
+	this->data = (int *) realloc(this->data, this->size*sizeof(int));
 }
 
 /*
@@ -48,6 +73,8 @@ bool Vector::find(int n)
 			return false;
 		}
 	}
+	
+	return false;
 }
 
 /*
@@ -64,6 +91,9 @@ int Vector::at(int pos)
 	}
 }
 
+/*
+ * Utility function that prints all elements of vector in order.
+ */
 void Vector::print_data()
 {
 	

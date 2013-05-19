@@ -10,16 +10,18 @@ int main()
 {
 	Vector v;
 	
-	v.add(1);
-	v.add(2);
-	v.add(3);
-	v.add(4);
-	v.add(5);
-	v.add(6);
+	v.add(43);
+	v.add(53);
+	v.add(12);
+	v.add(34);
+	v.add(94);
+	v.add(16);
 	
 	v.print_data();
 	
-	cout << v.at(3);
+	v.add(12, 0);
+	
+	v.print_data();
 	
 	return 0;
 }
