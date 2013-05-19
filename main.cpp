@@ -19,5 +19,7 @@ int main()
 	
 	v.print_data();
 	
+	cout << v.at(3);
+	
 	return 0;
 }

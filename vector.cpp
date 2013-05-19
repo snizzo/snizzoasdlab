@@ -33,14 +33,35 @@ void Vector::remove(int pos)
 {
 	//
 }
+
+/*
+ * Perform a linear search over all the vector.
+ * Note that this will happen in worst: linear time O(n)
+ */
 bool Vector::find(int n)
 {
-	//
+	for(int i=0;i<this->size;i++)
+	{
+		if (this->data[i]==n){
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 
+/*
+ * Return the element contained at that position of the array.
+ * Note that vector.at(3) will return this->data[3], the 4th element of the array.
+ */
 int Vector::at(int pos)
 {
-	//
+	if (pos <= this->size){
+		return this->data[pos];
+	} else {
+		std::cout << "Impossible to access not set value at position " << pos << "in vector structure \n";
+		return -1;
+	}
 }
 
 void Vector::print_data()
@@ -48,9 +69,9 @@ void Vector::print_data()
 	
 	std::cout << "data: ";
 	
-	for (int &i: this->data)
+	for(int i=0;i<this->size;i++)
 	{
-		std::cout << "[" << i << "]" << " ";
+		std::cout << "[" << this->data[i] << "]" << " ";
 	}
 	
 	std::cout << std::endl;
