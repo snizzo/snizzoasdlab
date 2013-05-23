@@ -1,7 +1,6 @@
 #ifndef HEAP_HPP
 #define HEAP_HPP
 
-#include "HeapNode.hpp"
 #include "vector.hpp"
 
 /*
@@ -21,6 +20,7 @@ class Heap
 		bool exists_right(int n);
 		void heapify(int i);
 		void build_heap();
+		void sort();
 };
 
 #endif

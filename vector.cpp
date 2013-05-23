@@ -102,7 +102,7 @@ int Vector::get_size()
 /*
  * Swap 2 elements from given indexes
  */
-void swap(int i1, int i2)
+void Vector::swap(int i1, int i2)
 {
 	int temp = this->data[i1];
 	this->data[i1] = this->data[i2];

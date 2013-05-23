@@ -5,13 +5,12 @@
 //constructor, void for now
 Heap::Heap()
 {
-	this->data = NULL;
 	this->size = 0;
 }
 
 void Heap::add(int input)
 {
-	this->data->add(input);
+	this->data.add(input);
 }
 
 int Heap::left(int n)
@@ -48,18 +47,18 @@ void Heap::heapify(int i)
 	int l = this->left(i);
 	int r = this->right(i);
 	
-	if (this->exists_left(l) && this->data->at(l) > this->data->at(i)){
+	if (this->exists_left(l) && this->data.at(l) > this->data.at(i)){
 		largest = l;
 	} else {
 		largest = i;
 	}
 	
-	if (this->exists_right(r) && this->data->at(r) > this->data->at(largest)){
+	if (this->exists_right(r) && this->data.at(r) > this->data.at(largest)){
 		largest = r;
 	}
 	
 	if (largest != i){
-		this->data->swap(largest,i);
+		this->data.swap(largest,i);
 		this->heapify(largest);
 	}
 }
@@ -76,17 +75,7 @@ void Heap::sort()
 	this->build_heap();
 	
 	for(int i = this->size-1;i>0;i--){
-		this->data->swap(0,i);
+		this->data.swap(0,i);
 		this->heapify(0);
 	}
 }
-
-/*
-def HeapSort( A ): 
-    BuildHeap( A )
-    HeapSize = HeapLength( A )
-    for i in range( HeapSize, 1 , -1 ):
-        A[ 1 ],A[ i ] = A[ i ],A[ 1 ]
-        HeapSize = HeapSize-1 
-        Heapify( A,1,HeapSize )
- */
