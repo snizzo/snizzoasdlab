@@ -13,6 +13,8 @@ class Vector{
 		void remove(int pos);
 		bool find(int n);
 		int at(int pos);
+		int get_size();
+		void swap(int i1, int i2);
 		
 		//utility
 		void print_data();

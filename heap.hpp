@@ -2,6 +2,7 @@
 #define HEAP_HPP
 
 #include "HeapNode.hpp"
+#include "vector.hpp"
 
 /*
  * This is written to be a max-heap and not a generally a heap.
@@ -9,15 +10,17 @@
 class Heap
 {
 	private:
-		HeapNode * root;
+		Vector data;
 		int size;
 	public:
 		Heap();
-		void add(int * numbers);
-		void add(int n);
-		void heapify(HeapNode * node);
-		void swap(HeapNode * n1, HeapNode * n2);
-		
+		void add(int input);
+		int left(int n);
+		int right(int n);
+		bool exists_left(int n);
+		bool exists_right(int n);
+		void heapify(int i);
+		void build_heap();
 };
 
 #endif

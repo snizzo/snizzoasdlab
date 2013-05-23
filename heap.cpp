@@ -5,66 +5,88 @@
 //constructor, void for now
 Heap::Heap()
 {
-	this->root = NULL;
+	this->data = NULL;
 	this->size = 0;
 }
 
-void Heap::add(int * numbers)
+void Heap::add(int input)
 {
-	//
+	this->data->add(input);
 }
 
-void Heap::add(int n)
+int Heap::left(int n)
 {
-	//
+	return n*2;
 }
 
-void Heap::heapify(HeapNode * node)
+int Heap::right(int n)
 {
-	HeapNode * largest = NULL;
-	
-	HeapNode * left = node->get_left();
-	HeapNode * right = node->get_right();
-	
-	if ((left==NULL) && (right==NULL)){
-		return; //it's a leaf
-	}
-	
-	if ((left != NULL) && (left->data > node->data)){
-		largest = left;
+	return n*2;
+}
+
+bool Heap::exists_left(int n)
+{
+	if ((n*2) > this->size-1){
+		return false;
 	} else {
-		largest = node;
+		return true;
+	}
+}
+
+bool Heap::exists_right(int n)
+{
+	if ((n*2+1) > this->size-1){
+		return false;
+	} else {
+		return true;
+	}
+}
+
+void Heap::heapify(int i)
+{
+	int largest = i;
+	int l = this->left(i);
+	int r = this->right(i);
+	
+	if (this->exists_left(l) && this->data->at(l) > this->data->at(i)){
+		largest = l;
+	} else {
+		largest = i;
 	}
 	
-	if ((right != NULL) && (right->data > largest->data)){
-		largest = right;
+	if (this->exists_right(r) && this->data->at(r) > this->data->at(largest)){
+		largest = r;
 	}
 	
-	if (largest != node){
-		this->swap(largest, node);
+	if (largest != i){
+		this->data->swap(largest,i);
 		this->heapify(largest);
 	}
 }
 
-void Heap::swap(HeapNode * n1, HeapNode * n2)
+void Heap::build_heap()
 {
-	int swap = n1->data;
-	n1->data = n2->data;
-	n2->data = swap;
+	for(int i=this->size/2; i>0; i--){
+		this->heapify(i);
+	}
 }
 
-void Heap::buildHeap()
+void Heap::sort()
 {
-	int n = this->size-1;
+	this->build_heap();
 	
-	for(int i=n/2;i>0;i--){
-		//this->heapify(i
-	} 
+	for(int i = this->size-1;i>0;i--){
+		this->data->swap(0,i);
+		this->heapify(0);
+	}
 }
 
 /*
-def BuildHeap( A ): 
-    n = HeapLength( A )
-    for i in range( n/2 ,0 ,-1 ):
-        Heapify( A, i, n )
+def HeapSort( A ): 
+    BuildHeap( A )
+    HeapSize = HeapLength( A )
+    for i in range( HeapSize, 1 , -1 ):
+        A[ 1 ],A[ i ] = A[ i ],A[ 1 ]
+        HeapSize = HeapSize-1 
+        Heapify( A,1,HeapSize )
  */

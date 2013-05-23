@@ -92,6 +92,24 @@ int Vector::at(int pos)
 }
 
 /*
+ * Return total size of vector
+ */
+int Vector::get_size()
+{
+	return this->size-1;
+}
+
+/*
+ * Swap 2 elements from given indexes
+ */
+void swap(int i1, int i2)
+{
+	int temp = this->data[i1];
+	this->data[i1] = this->data[i2];
+	this->data[i2] = temp;
+}
+
+/*
  * Utility function that prints all elements of vector in order.
  */
 void Vector::print_data()
