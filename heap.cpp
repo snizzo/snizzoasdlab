@@ -29,7 +29,6 @@ int Heap::right(int n)
 bool Heap::exists_left(int n)
 {
 	if ((n*2) > this->size-1){
-		std::cout << "left child not found, n="<<n<<", size="<<this->size-1<<"\n";
 		return false;
 	} else {
 		return true;
@@ -39,41 +38,39 @@ bool Heap::exists_left(int n)
 bool Heap::exists_right(int n)
 {
 	if ((n*2+1) > this->size-1){
-		std::cout << "right child not found, n="<<n<<", size="<<this->size-1<<"\n";
 		return false;
 	} else {
 		return true;
 	}
 }
 
-void Heap::heapify(int i)
+void Heap::heapify(int i, int n)
 {
 	int smallest = i;
 	int l = this->left(i);
 	int r = this->right(i);
-	
-	if (this->exists_left(i) && this->data.at(l) < this->data.at(i)){
+			
+	if (this->exists_left(i) && l<=n && this->data.at(l) < this->data.at(i)){
 		smallest = l;
 	} else {
 		smallest = i;
 	}
 	
-	if (this->exists_right(i) && this->data.at(r) < this->data.at(smallest)){
+	if (this->exists_right(i) && r<=n && this->data.at(r) < this->data.at(smallest)){
 		smallest = r;
 	}
 	
 	if (smallest != i){
 		this->data.swap(smallest,i);
-		this->heapify(smallest);
+		this->heapify(smallest,n);
 	}
-	this->print_data();
 }
 
 void Heap::build_heap()
 {
 	int to = this->size/2;
 	for(int i=to; i>=0; i--){
-		this->heapify(i);
+		this->heapify(i,this->size-1);
 	}
 }
 
@@ -81,9 +78,12 @@ void Heap::sort()
 {
 	this->build_heap();
 	
-	for(int i = this->size-1;i>0;i--){
+	int size = this->size-1;
+	
+	for(int i = size;i>0;i--){
 		this->data.swap(0,i);
-		this->heapify(i);
+		size -= 1;
+		this->heapify(0, size);
 	}
 }
 

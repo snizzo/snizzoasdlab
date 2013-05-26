@@ -23,6 +23,8 @@ int main()
 	
 	
 	h.build_heap();
+	h.sort();
+	h.print_data();
 	
 	return 0;
 }

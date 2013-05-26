@@ -18,7 +18,7 @@ class Heap
 		int right(int n);
 		bool exists_left(int n);
 		bool exists_right(int n);
-		void heapify(int i);
+		void heapify(int i, int n);
 		void build_heap();
 		void sort();
 		
