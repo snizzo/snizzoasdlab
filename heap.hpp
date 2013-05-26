@@ -21,6 +21,9 @@ class Heap
 		void heapify(int i);
 		void build_heap();
 		void sort();
+		
+		//debug
+		void print_data();
 };
 
 #endif
