@@ -1,5 +1,5 @@
 
-#include "stack.hpp"
+#include "stack.h"
 
 #include <cstdio>
 #include <cstdlib>

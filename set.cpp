@@ -1,5 +1,5 @@
 
-#include "set.hpp"
+#include "set.h"
 #include <cstdlib>
 
 Set::Set(int n) //MAKE

@@ -1,5 +1,5 @@
 
-#include "queue.hpp"
+#include "queue.h"
 
 #include <cstdio>
 #include <cstdlib>

@@ -1,5 +1,5 @@
-#ifndef LINKEDLIST_HPP
-#define LINKEDLIST_HPP
+#ifndef LINKEDLIST_H
+#define LINKEDLIST_H
 
 class LinkedList
 {

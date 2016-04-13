@@ -1,5 +1,5 @@
-#ifndef SET_HPP
-#define SET_HPP
+#ifndef SET_H
+#define SET_H
 
 class Set{
 	private:

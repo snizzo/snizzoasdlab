@@ -1,30 +1,15 @@
 #include <iostream>
 using namespace std;
 
-#include "stack.hpp"
-#include "queue.hpp"
-#include "set.hpp"
-#include "vector.hpp"
-#include "btree.hpp"
-#include "heap.hpp"
+#include "stack.h"
+#include "queue.h"
+#include "set.h"
+#include "vector.h"
+#include "btree.h"
+#include "heap.h"
 
 int main()
 {
-	Heap h;
-	
-	h.add(80);
-	h.add(40);
-	h.add(30);
-	h.add(60);
-	h.add(81);
-	h.add(90);
-	h.add(100);
-	h.add(10);
-	
-	
-	h.build_heap();
-	h.sort();
-	h.print_data();
 	
 	return 0;
 }

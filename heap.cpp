@@ -1,5 +1,5 @@
 
-#include "heap.hpp"
+#include "heap.h"
 #include <iostream>
 
 //constructor, void for now

@@ -1,5 +1,5 @@
-#ifndef STACK_HPP
-#define STACK_HPP
+#ifndef STACK_H
+#define STACK_H
 
 class Stack {
 	private:

@@ -1,5 +1,7 @@
-#ifndef GRAPH_HPP
-#define GRAPH_HPP
+#ifndef GRAPH_H
+#define GRAPH_H
+
+#include "queue.h"
 
 class Graph{
 	private:
@@ -8,7 +10,7 @@ class Graph{
 		int pi [4];
 		Queue q [4];
 		char color [4];
-		int * adj(int n)
+		int * adj(int n);
 	
 	public:
 		void setData();
