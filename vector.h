@@ -217,7 +217,10 @@ template <class T> class Vector{
             
             for(int i=0;i<this->size;i++)
             {
-                std::cout << "[" << this->data[i] << "]" << " ";
+                std::cout << "[";
+                cout << this->data[i];
+                cout << "]";
+                cout << " ";
             }
             
             std::cout << std::endl;

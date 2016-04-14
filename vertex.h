@@ -15,7 +15,7 @@ class Vertex {
         Vertex();
         Vertex(string name);
         
-        std::string getName();
+        std::string getName() const;
         void setName(string name);
         
         //define an order relation between vertex objects
@@ -25,6 +25,7 @@ class Vertex {
         bool operator<= (Vertex &y);
         bool operator>= (Vertex &y);
         bool operator!= (Vertex &y);
+        friend std::ostream& operator<< (std::ostream &os, Vertex const &m);
 };
 
 #endif

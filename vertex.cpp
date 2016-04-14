@@ -19,7 +19,7 @@ Vertex::Vertex(string name)
     setName(name);
 }
 
-string Vertex::getName()
+string Vertex::getName() const
 {
     return m_name;
 }
@@ -88,3 +88,9 @@ bool Vertex::operator!= (Vertex &y)
 {
     return !operator==(y);
 }
+
+std::ostream& operator<< (std::ostream &os, Vertex const &m)
+{
+    return os << "(Vertex:"<<m.getName()<<")";
+}
+
