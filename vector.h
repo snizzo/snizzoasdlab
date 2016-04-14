@@ -5,14 +5,14 @@
 
 template <class T> class Vector{
 	private:
-		int * data;
+		T * data;
 		int size;
 		
 	public:
         /*
          * Setting default starting value.
          */
-		Vector()
+		explicit Vector()
         {
             this->data = NULL;
             this->size = 0;
@@ -64,22 +64,42 @@ template <class T> class Vector{
             this->data = (T *) realloc(this->data, this->size*sizeof(T));
         }
 
-        /*
+        /**
          * Perform a linear search over all the vector.
          * Note that this will happen in worst: linear time O(n)
+         * 
+         * @return bool true if n is found; else false
          */
-		bool find(T n)
+		bool has(T n)
         {
             for(int i=0;i<this->size;i++)
             {
                 if (this->data[i]==n){
                     return true;
-                } else {
-                    return false;
                 }
             }
             
             return false;
+        }
+
+        /**
+         * Perform a linear search over all the vector.
+         * Note that this will happen in worst: linear time O(n)
+         * 
+         * @param T n object to look for
+         * 
+         * @return int i >= 0 if n has been found. i contains the position of n.
+         */
+		int find(T n)
+        {
+            for(int i=0;i<this->size;i++)
+            {
+                if (this->data[i]==n){
+                    return i;
+                }
+            }
+            
+            return -1;
         }
 
         /*

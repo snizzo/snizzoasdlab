@@ -5,6 +5,7 @@ using namespace std;
 #include "graph.h"
 #include "vertex.h"
 #include "edge.h"
+#include "orderedvector.h"
 
 int main(int argc, char* argv[])
 {
@@ -12,18 +13,12 @@ int main(int argc, char* argv[])
     
     Vertex * x = new Vertex("B");
     Vertex * y = new Vertex("A");
+    Vertex * z = new Vertex("A");
     
-    Edge e(x, y);
+    Vector<Vertex> v;
+    v.add(*x);v.add(*y);
     
-    if(*x<=*y){
-        cout << "true\n";
-    } else {
-        cout << "false\n";
-    }
-    
-    Vector<int> v;
-    v.add(1);v.add(3);v.add(4);v.add(7);v.add(8);v.remove(3);
-    v.print_data();
+    cout << v.find(*z) << endl;
     
 	return 0;
 }
