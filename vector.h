@@ -27,6 +27,17 @@ template <class T> class Vector{
         }
         
         /**
+         * Can enable or disable automatic memory realloc.
+         * USE THIS WITH CAUTION, CAN LEAD TO SEGFAULT!!!
+         * 
+         * @param value true or false
+         */
+        void set_automatic_realloc(bool value)
+        {
+            this->allow_automatic_realloc = value;
+        }
+        
+        /**
          * Performance friendly vector resize.
          * This assures constant time when adding (memory part)
          * instead of linear.
@@ -72,8 +83,10 @@ template <class T> class Vector{
             }
         }
         
-        /*
+        /**
          * By default, elements will be added at the end of the array.
+         * 
+         * @param n the element to be added.
          */
 		void add(T n)
         {
@@ -90,13 +103,12 @@ template <class T> class Vector{
          * Overloaded function that add an element in desired position at pos
          * 
          */
-		void add(T n, T pos)
+		void add(T n, int pos)
         {
-            T segment = this->size-pos;
+            int segment = this->size-pos;
             //incrementing internal pointer
             this->size += 1;
-            //reallocating in order to fit
-            this->data = (T *) realloc(this->data, this->size*sizeof(T));
+            this->automatic_realloc();
             //moving everything to make the new space fit
             memmove(&this->data[pos+1], &this->data[pos], segment*sizeof(T));
             //inserting new element into array
