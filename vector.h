@@ -5,9 +5,14 @@
 
 template <class T> class Vector{
 	private:
+        //internal parameters
 		T * data;
 		int size;
-		
+        int memsize;
+        
+        //class options
+        bool allow_automatic_realloc;
+        
 	public:
         /*
          * Setting default starting value.
@@ -16,8 +21,57 @@ template <class T> class Vector{
         {
             this->data = NULL;
             this->size = 0;
+            this->memsize = 0;
+            this->allow_automatic_realloc = true;
+            this->data = (T *) realloc(this->data, sizeof(T)*this->memsize);
         }
-
+        
+        /**
+         * Performance friendly vector resize.
+         * This assures constant time when adding (memory part)
+         * instead of linear.
+         * 
+         * Can be useful when input size is already known.
+         * 
+         * @param int amount of items of type T to be contained in Vector
+         */
+        void force_realloc(int amount)
+        {
+            if(amount < this->size){
+                cout << "WARNING: can't resize Vector's memory less then its items required memory!";
+                return;
+            }
+            
+            //reallocation of internal data array
+            this->data = (T *) realloc(this->data, sizeof(T)*amount);
+            this->memsize = amount;
+        }
+        
+        /**
+         * This will assure there's always enough space for incoming objects.
+         * When memory is almost filled, this will double the amount, making
+         * it scale in power of 2 and allowing for faster insertion.
+         */
+        void automatic_realloc()
+        {
+            if(!this->allow_automatic_realloc){
+                return;
+            }
+            
+            if((this->memsize-this->size)<2){
+                if(this->memsize==0){
+                    this->memsize += 1;
+                }
+                cout << "realloc to: " << this->memsize*2 << endl;
+                this->force_realloc(this->memsize*2);
+            }
+            
+            if (this->size < (this->memsize/2)-3){
+                cout << "realloc to: " << this->memsize/2 << endl;
+                this->force_realloc(this->memsize/2);
+            }
+        }
+        
         /*
          * By default, elements will be added at the end of the array.
          */
@@ -26,8 +80,7 @@ template <class T> class Vector{
             //adding 1 to size as 1 element has been added
             this->size += 1;
             
-            //reallocation of Ternal data array
-            this->data = (T *) realloc(this->data, sizeof(T)*this->size);
+            this->automatic_realloc();
             
             //setting last element to new element
             this->data[this->size-1] = n;
@@ -40,28 +93,33 @@ template <class T> class Vector{
 		void add(T n, T pos)
         {
             T segment = this->size-pos;
-            //incrementing Ternal poTer
+            //incrementing internal pointer
             this->size += 1;
             //reallocating in order to fit
             this->data = (T *) realloc(this->data, this->size*sizeof(T));
             //moving everything to make the new space fit
             memmove(&this->data[pos+1], &this->data[pos], segment*sizeof(T));
-            //inserting new element To array
+            //inserting new element into array
             this->data[pos] = n;
         }
 
         /*
          * This function removes the specified element in position pos
          */
-		void remove(T pos)
+		void remove(int pos)
         {
-            T segment = this->size-pos;
+            if(this->size==0){
+                cout << "Vector::remove("<<pos<<"): can't delete: vector is already empty" << endl;
+                return;
+            }
+            
+            int segment = this->size-pos;
             
             memmove(&this->data[pos], &this->data[pos+1], segment*sizeof(T));	
             
             this->size -= 1;
             
-            this->data = (T *) realloc(this->data, this->size*sizeof(T));
+            this->automatic_realloc();
         }
 
         /**
@@ -136,6 +194,9 @@ template <class T> class Vector{
 		
 		/*
          * Utility function that prints all elements of vector in order.
+         * 
+         * WARNING: DO NOT USE WITH CUSTOM OBJECTS
+         *          USE ONLY WITH BASIC TYPES (int, double, etc...)
          */
 		void print_data()
         {
