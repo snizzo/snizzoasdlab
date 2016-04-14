@@ -1,12 +1,7 @@
 #include <iostream>
 using namespace std;
 
-#include "stack.h"
-#include "queue.h"
-#include "set.h"
 #include "vector.h"
-#include "btree.h"
-#include "heap.h"
 #include "graph.h"
 #include "vertex.h"
 #include "edge.h"
@@ -26,7 +21,9 @@ int main(int argc, char* argv[])
         cout << "false\n";
     }
     
-    
+    Vector<int> v;
+    v.add(1);v.add(3);v.add(4);v.add(7);v.add(8);v.remove(3);
+    v.print_data();
     
 	return 0;
 }

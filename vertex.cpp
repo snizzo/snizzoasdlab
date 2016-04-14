@@ -29,6 +29,9 @@ void Vertex::setName(string name)
     m_name = name;
 }
 
+/*
+ * order relation
+ */
 bool Vertex::operator> (Vertex &y)
 {
     if(m_name.compare(y.getName())>0){
@@ -38,6 +41,9 @@ bool Vertex::operator> (Vertex &y)
     }
 }
 
+/*
+ * order relation
+ */
 bool Vertex::operator< (Vertex &y)
 {
     if(m_name.compare(y.getName())<0){
@@ -47,6 +53,9 @@ bool Vertex::operator< (Vertex &y)
     }
 }
 
+/*
+ * order relation
+ */
 bool Vertex::operator== (Vertex &y)
 {
     if(m_name.compare(y.getName())==0){
@@ -56,7 +65,26 @@ bool Vertex::operator== (Vertex &y)
     }
 }
 
+/*
+ * order relation
+ */
 bool Vertex::operator<= (Vertex &y)
 {
-    return operator<(y) or operator==(y);
+    return !operator>(y);
+}
+
+/*
+ * order relation
+ */
+bool Vertex::operator>= (Vertex &y)
+{
+    return !operator<(y);
+}
+
+/*
+ * order relation
+ */
+bool Vertex::operator!= (Vertex &y)
+{
+    return !operator==(y);
 }

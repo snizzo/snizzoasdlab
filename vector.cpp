@@ -1,13 +1,14 @@
 
-#include "vector.h"
 #include <iostream>
 #include <cstdlib>
 #include <cstring>
+#include "vector.h"
 
 /*
  * Setting default starting value.
  */
-Vector::Vector()
+template <class T>
+Vector<T>::Vector()
 {
 	this->data = NULL;
 	this->size = 0;
@@ -16,13 +17,14 @@ Vector::Vector()
 /*
  * By default, elements will be added at the end of the array.
  */
-void Vector::add(int n)
+template <class T>
+void Vector<T>::add(T n)
 {
 	//adding 1 to size as 1 element has been added
 	this->size += 1;
 	
-	//reallocation of internal data array
-	this->data = (int *) realloc(this->data, sizeof(int)*this->size);
+	//reallocation of Ternal data array
+	this->data = (T *) realloc(this->data, sizeof(T)*this->size);
 	
 	//setting last element to new element
 	this->data[this->size-1] = n;
@@ -32,38 +34,41 @@ void Vector::add(int n)
  * Overloaded function that add an element in desired position at pos
  * 
  */
-void Vector::add(int n, int pos)
+template <class T>
+void Vector<T>::add(T n, T pos)
 {
-	int segment = this->size-pos;
-	//incrementing internal pointer
+	T segment = this->size-pos;
+	//incrementing Ternal poTer
 	this->size += 1;
 	//reallocating in order to fit
-	this->data = (int *) realloc(this->data, this->size*sizeof(int));
+	this->data = (T *) realloc(this->data, this->size*sizeof(T));
 	//moving everything to make the new space fit
-	memmove(&this->data[pos+1], &this->data[pos], segment*sizeof(int));
-	//inserting new element into array
+	memmove(&this->data[pos+1], &this->data[pos], segment*sizeof(T));
+	//inserting new element To array
 	this->data[pos] = n;
 }
 
 /*
  * This function removes the specified element in position pos
  */
-void Vector::remove(int pos)
+template <class T>
+void Vector<T>::remove(T pos)
 {
-	int segment = this->size-pos;
+	T segment = this->size-pos;
 	
-	memmove(&this->data[pos], &this->data[pos+1], segment*sizeof(int));	
+	memmove(&this->data[pos], &this->data[pos+1], segment*sizeof(T));	
 	
 	this->size -= 1;
 	
-	this->data = (int *) realloc(this->data, this->size*sizeof(int));
+	this->data = (T *) realloc(this->data, this->size*sizeof(T));
 }
 
 /*
  * Perform a linear search over all the vector.
  * Note that this will happen in worst: linear time O(n)
  */
-bool Vector::find(int n)
+template <class T>
+bool Vector<T>::find(T n)
 {
 	for(int i=0;i<this->size;i++)
 	{
@@ -81,7 +86,8 @@ bool Vector::find(int n)
  * Return the element contained at that position of the array.
  * Note that vector.at(3) will return this->data[3], the 4th element of the array.
  */
-int Vector::at(int pos)
+template <class T>
+T Vector<T>::at(T pos)
 {
 	if (pos <= this->size){
 		return this->data[pos];
@@ -94,7 +100,8 @@ int Vector::at(int pos)
 /*
  * Return total size of vector
  */
-int Vector::get_size()
+template <class T>
+T Vector<T>::get_size()
 {
 	return this->size-1;
 }
@@ -102,9 +109,10 @@ int Vector::get_size()
 /*
  * Swap 2 elements from given indexes
  */
-void Vector::swap(int i1, int i2)
+template <class T>
+void Vector<T>::swap(T i1, T i2)
 {
-	int temp = this->data[i1];
+	T temp = this->data[i1];
 	this->data[i1] = this->data[i2];
 	this->data[i2] = temp;
 }
@@ -112,7 +120,8 @@ void Vector::swap(int i1, int i2)
 /*
  * Utility function that prints all elements of vector in order.
  */
-void Vector::print_data()
+template <class T>
+void Vector<T>::print_data()
 {
 	
 	std::cout << "data: ";

@@ -18,10 +18,13 @@ class Vertex {
         std::string getName();
         void setName(string name);
         
+        //define an order relation between vertex objects
         bool operator> (Vertex &y);
         bool operator< (Vertex &y);
         bool operator== (Vertex &y);
         bool operator<= (Vertex &y);
+        bool operator>= (Vertex &y);
+        bool operator!= (Vertex &y);
 };
 
 #endif
