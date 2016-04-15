@@ -1,6 +1,8 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <cstdio>
+#include <cstdlib>
 #include <cstring>
 
 template <class T> class Vector{
@@ -142,7 +144,7 @@ template <class T> class Vector{
         {
             for(int i=0;i<this->size;i++)
             {
-                if (this->data[i]==n){
+                if (*this->data[i]==*n){
                     return true;
                 }
             }
@@ -162,7 +164,7 @@ template <class T> class Vector{
         {
             for(int i=0;i<this->size;i++)
             {
-                if (this->data[i]==n){
+                if (*this->data[i]==*n){
                     return i;
                 }
             }
@@ -180,7 +182,7 @@ template <class T> class Vector{
                 return this->data[pos];
             } else {
                 std::cout << "Impossible to access not set value at position " << pos << "in vector structure \n";
-                return -1;
+                return NULL;
             }
         }
 
@@ -216,7 +218,7 @@ template <class T> class Vector{
             for(int i=0;i<this->size;i++)
             {
                 std::cout << "[";
-                cout << this->data[i];
+                cout << *this->data[i];
                 cout << "]";
                 cout << " ";
             }
