@@ -4,7 +4,7 @@
 #include <cstring>
 
 template <class T> class Vector{
-	private:
+	protected:
         //internal parameters
 		T * data;
 		int size;
@@ -73,12 +73,10 @@ template <class T> class Vector{
                 if(this->memsize==0){
                     this->memsize += 1;
                 }
-                cout << "realloc to: " << this->memsize*2 << endl;
                 this->force_realloc(this->memsize*2);
             }
             
             if (this->size < (this->memsize/2)-3){
-                cout << "realloc to: " << this->memsize/2 << endl;
                 this->force_realloc(this->memsize/2);
             }
         }
@@ -176,7 +174,7 @@ template <class T> class Vector{
          * Return the element contained at that position of the array.
          * Note that vector.at(3) will return this->data[3], the 4th element of the array.
          */
-		T at(T pos)
+		T at(int pos)
         {
             if (pos <= this->size){
                 return this->data[pos];
@@ -186,15 +184,15 @@ template <class T> class Vector{
             }
         }
 
-        /*
+        /**
          * Return total size of vector
          */
-		T get_size()
+		int get_size()
         {
             return this->size-1;
         }
 
-        /*
+        /**
          * Swap 2 elements from given indexes
          */
 		void swap(T i1, T i2)
@@ -204,7 +202,7 @@ template <class T> class Vector{
             this->data[i2] = temp;
         }
 		
-		/*
+		/**
          * Utility function that prints all elements of vector in order.
          * 
          * WARNING: DO NOT USE WITH CUSTOM OBJECTS
