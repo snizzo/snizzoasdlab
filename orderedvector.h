@@ -42,14 +42,20 @@ template <class T> class OrderedVector : public Vector<T>{
             int high = this->size-1; //array pos is size-1
             int mid = 0; //to be set immediately
             
-            int maxiterations =10;
-            int iterations = 0;
+            if(n<this->data[low] or n>this->data[high])
+            {
+                return -1;
+            }
+            
+            int old = -1; //previous result
             
             while(true){
-                iterations++;
                 mid = low+((high-low)/2);
                 
-                cout << low << " " << high << " " << mid << " " << this->data[mid] << endl;
+                //prevents from infinite loop
+                if(old==mid){
+                    return -1;
+                }
                 
                 if( this->data[mid] == n){
                     return mid;
@@ -60,10 +66,7 @@ template <class T> class OrderedVector : public Vector<T>{
                 if( this->data[mid] > n ){
                     high = mid;
                 }
-                
-                if(iterations>maxiterations){
-                    return 0;
-                }
+                old = mid;
             }
             
             return -1;
