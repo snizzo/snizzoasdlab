@@ -1,9 +1,12 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
+#include <iostream>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+
+using namespace std;
 
 template <class T> class Vector{
 	protected:
@@ -191,7 +194,7 @@ template <class T> class Vector{
          */
 		int get_size()
         {
-            return this->size-1;
+            return this->size;
         }
 
         /**

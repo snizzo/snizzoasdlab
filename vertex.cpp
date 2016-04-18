@@ -11,7 +11,30 @@ Vertex::Vertex()
 {
 }
 
-/*
+/**
+ * Vertex connection representation
+ */
+void Vertex::addIngoing(Vertex * v)
+{
+	this->ingoing_edges.add(v);
+}
+
+void Vertex::addOutgoing(Vertex * v)
+{
+	this->outgoing_edges.add(v);
+}
+
+OrderedVector<Vertex *> Vertex::getOutgoing()
+{
+	return outgoing_edges;
+}
+
+OrderedVector<Vertex *> Vertex::getIngoing()
+{
+	return ingoing_edges;
+}
+
+/**
  * Constructor that sets name
  */
 Vertex::Vertex(string name)
@@ -29,7 +52,7 @@ void Vertex::setName(string name)
     m_name = name;
 }
 
-/*
+/**
  * order relation
  */
 bool Vertex::operator> (Vertex &y)
@@ -41,7 +64,7 @@ bool Vertex::operator> (Vertex &y)
     }
 }
 
-/*
+/**
  * order relation
  */
 bool Vertex::operator< (Vertex &y)
@@ -53,7 +76,7 @@ bool Vertex::operator< (Vertex &y)
     }
 }
 
-/*
+/**
  * order relation
  */
 bool Vertex::operator== (Vertex &y)
@@ -65,7 +88,7 @@ bool Vertex::operator== (Vertex &y)
     }
 }
 
-/*
+/**
  * order relation
  */
 bool Vertex::operator<= (Vertex &y)
@@ -73,7 +96,7 @@ bool Vertex::operator<= (Vertex &y)
     return !operator>(y);
 }
 
-/*
+/**
  * order relation
  */
 bool Vertex::operator>= (Vertex &y)
@@ -81,7 +104,7 @@ bool Vertex::operator>= (Vertex &y)
     return !operator<(y);
 }
 
-/*
+/**
  * order relation
  */
 bool Vertex::operator!= (Vertex &y)

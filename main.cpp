@@ -7,11 +7,22 @@ using namespace std;
 
 //normal headers
 #include "graph.h"
-#include "vertex.h"
-#include "edge.h"
 
 int main(int argc, char* argv[])
 {
+	Graph g;
+	g.addVertex("A");
+	g.addVertex("E");
+	g.addVertex("C");
+	g.addVertex("G");
+	g.addVertex("B");
+	g.addVertex("F");
+	g.addVertex("D");
+	g.addEdge("A", "D");
+	
+	g.printGraph();
+	
+	/*
     Vertex * a = new Vertex("A");
     Vertex * b = new Vertex("B");
     Vertex * c = new Vertex("C");
@@ -47,7 +58,7 @@ int main(int argc, char* argv[])
     cout << ve.find(new Vertex("G")) << endl;
     cout << ve.find(new Vertex("H")) << endl;
     cout << ve.find(new Vertex("M")) << endl;
-    
+    */
     
 	return 0;
 }

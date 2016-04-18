@@ -3,10 +3,7 @@
 
 #include <cstdlib>
 #include <cstring>
-#include "graph.h"
 #include "orderedvector.h"
-
-using namespace std;
 
 class Vertex {
     private:
@@ -18,6 +15,10 @@ class Vertex {
         Vertex();
         Vertex(string name);
         
+        void addIngoing(Vertex * v);
+        void addOutgoing(Vertex * v);
+        OrderedVector<Vertex *> getOutgoing();
+        OrderedVector<Vertex *> getIngoing();
         std::string getName() const;
         void setName(string name);
         

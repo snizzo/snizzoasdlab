@@ -1,9 +1,12 @@
 #ifndef ORDEREDVECTOR_H
 #define ORDEREDVECTOR_H
 
+#include <iostream>
 #include <cstdlib>
 #include <cstring>
 #include "vector.h"
+
+using namespace std;
 
 template <class T> class OrderedVector : public Vector<T>{
 	public:
@@ -18,10 +21,8 @@ template <class T> class OrderedVector : public Vector<T>{
          */
 		void add(T n)
         {
-            std::cout << std::endl << "adding..." << *n << std::endl;
             int spot = find_closest(n);
             Vector<T>::add(n, spot);
-            Vector<T>::print_data();
             
         }
 
