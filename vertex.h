@@ -4,12 +4,15 @@
 #include <cstdlib>
 #include <cstring>
 #include "graph.h"
+#include "orderedvector.h"
 
 using namespace std;
 
 class Vertex {
     private:
         std::string m_name;
+        OrderedVector<Vertex *> outgoing_edges;
+        OrderedVector<Vertex *> ingoing_edges;
     
     public:
         Vertex();

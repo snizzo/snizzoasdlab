@@ -40,7 +40,7 @@ template <class T> class Vector{
         }
         
         /**
-         * Performance friendly vector resize.
+         * Performance fristd::endly vector resize.
          * This assures constant time when adding (memory part)
          * instead of linear.
          * 
@@ -51,7 +51,7 @@ template <class T> class Vector{
         void force_realloc(int amount)
         {
             if(amount < this->size){
-                cout << "WARNING: can't resize Vector's memory less then its items required memory!";
+                std::cout << "WARNING: can't resize Vector's memory less then its items required memory!";
                 return;
             }
             
@@ -121,7 +121,7 @@ template <class T> class Vector{
 		void remove(int pos)
         {
             if(this->size==0){
-                cout << "Vector::remove("<<pos<<"): can't delete: vector is already empty" << endl;
+                std::cout << "Vector::remove("<<pos<<"): can't delete: vector is already empty" << std::endl;
                 return;
             }
             
@@ -218,9 +218,9 @@ template <class T> class Vector{
             for(int i=0;i<this->size;i++)
             {
                 std::cout << "[";
-                cout << *this->data[i];
-                cout << "]";
-                cout << " ";
+                std::cout << *this->data[i];
+                std::cout << "]";
+                std::cout << " ";
             }
             
             std::cout << std::endl;

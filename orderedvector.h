@@ -18,7 +18,7 @@ template <class T> class OrderedVector : public Vector<T>{
          */
 		void add(T n)
         {
-            cout << endl << "adding..." << *n << endl;
+            std::cout << std::endl << "adding..." << *n << std::endl;
             int spot = find_closest(n);
             Vector<T>::add(n, spot);
             Vector<T>::print_data();
