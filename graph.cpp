@@ -13,8 +13,27 @@ void Graph::addVertex(std::string name)
 
 void Graph::addEdge(std::string from, std::string to)
 {
-	Vertex * vfrom = data.at(data.find(new Vertex(from)));
-	Vertex * vto = data.at(data.find(new Vertex(to)));
+	Vertex * vfrom = NULL;
+	Vertex * vto = NULL;
+	
+	int at_from = data.find(new Vertex(from));
+	int at_to = data.find(new Vertex(to));
+	
+	if(at_from >= 0){
+		vfrom = data.at(at_from);
+	} else {
+		vfrom = new Vertex(from);
+		data.add(vfrom);
+	}
+	
+	if(at_to >= 0){
+		vto = data.at(at_to);
+	} else {
+		vto = new Vertex(to);
+		data.add(vto);
+	}
+	
+	
 	
 	if(vfrom!=NULL && vto!=NULL){
 		vfrom->addOutgoing(vto);

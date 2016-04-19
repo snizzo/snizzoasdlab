@@ -16,13 +16,11 @@ int main(int argc, char* argv[])
 	
 	/*
 	Graph g;
-	g.addVertex("A");
 	g.addVertex("E");
 	g.addVertex("C");
 	g.addVertex("G");
 	g.addVertex("B");
 	g.addVertex("F");
-	g.addVertex("D");
 	g.addEdge("A", "D");
 	
 	g.printGraph();
@@ -64,6 +62,7 @@ int main(int argc, char* argv[])
     cout << ve.find(new Vertex("G")) << endl;
     cout << ve.find(new Vertex("H")) << endl;
     cout << ve.find(new Vertex("M")) << endl;
+    cout << ve.find(new Vertex("Z")) << endl;
     */
     
 	return 0;
