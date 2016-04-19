@@ -1,5 +1,5 @@
 #include <iostream>
-using namespace std;
+#include <string>
 
 //template based class
 #include "vector.h"
@@ -7,9 +7,14 @@ using namespace std;
 
 //normal headers
 #include "graph.h"
+#include "parser.h"
 
 int main(int argc, char* argv[])
 {
+	Parser p;
+	Graph * rec = p.buildGraphFromStdin();
+	
+	/*
 	Graph g;
 	g.addVertex("A");
 	g.addVertex("E");
@@ -21,6 +26,7 @@ int main(int argc, char* argv[])
 	g.addEdge("A", "D");
 	
 	g.printGraph();
+	*/
 	
 	/*
     Vertex * a = new Vertex("A");

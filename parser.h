@@ -8,9 +8,9 @@
 using namespace std;
 
 class Parser {
-    
     public:
         Graph * buildGraphFromFile(string filepath);
+        Graph * buildGraphFromStdin();
 };
 
 #endif
