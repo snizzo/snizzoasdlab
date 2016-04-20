@@ -13,15 +13,15 @@ int main(int argc, char* argv[])
 {
 	Parser p;
 	Graph * rec = p.buildGraphFromStdin();
+	rec->printGraph();
 	
 	/*
 	Graph g;
-	g.addVertex("E");
-	g.addVertex("C");
-	g.addVertex("G");
-	g.addVertex("B");
-	g.addVertex("F");
-	g.addEdge("A", "D");
+	g.addEdge("C","E");
+    g.addEdge("A","E");
+    g.addEdge("A","F");
+    g.addEdge("F","B");
+    g.addVertex("G");
 	
 	g.printGraph();
 	*/

@@ -7,8 +7,11 @@ using namespace std;
 
 void Graph::addVertex(std::string name)
 {
-	Vertex * v = new Vertex(name);
-	this->data.add(v);
+	//avoid duplicates
+	if(data.find(new Vertex(name))==-1){
+		Vertex * v = new Vertex(name);
+		this->data.add(v);
+	}
 }
 
 void Graph::addEdge(std::string from, std::string to)
@@ -33,6 +36,8 @@ void Graph::addEdge(std::string from, std::string to)
 		data.add(vto);
 	}
 	
+	vfrom = data.at(data.find(new Vertex(from)));
+	vto = data.at(data.find(new Vertex(to)));
 	
 	
 	if(vfrom!=NULL && vto!=NULL){
@@ -45,15 +50,17 @@ void Graph::addEdge(std::string from, std::string to)
 
 void Graph::printGraph()
 {
-	cout << *(*data.at(0)).getOutgoing().at(0) << endl;
-	
-	for(int i=0;i<data.get_size();i++){
-		std::cout << "Node: " << *data.at(i) << endl;
-		for(int j=0;j<(*data.at(i)).getOutgoing().get_size();j++){
-			std::cout << "      " << " -> " << *(*data.at(i)).getOutgoing().at(j) << endl;
+	if(data.get_size()>0){
+		for(int i=0;i<data.get_size();i++){
+			std::cout << "Node: " << *data.at(i) << endl;
+			for(int j=0;j<(*data.at(i)).getOutgoing().get_size();j++){
+				std::cout << "      " << " -> " << *(*data.at(i)).getOutgoing().at(j) << endl;
+			}
+			for(int j=0;j<(*data.at(i)).getIngoing().get_size();j++){
+				std::cout << "      " << " <- " << *(*data.at(i)).getIngoing().at(j) << endl;
+			}
 		}
-		for(int j=0;j<(*data.at(i)).getIngoing().get_size();j++){
-			std::cout << "      " << " <- " << *(*data.at(i)).getIngoing().at(j) << endl;
-		}
+	} else {
+		cout << "Empty graph." << endl;
 	}
 }

@@ -94,6 +94,8 @@ template <class T> class OrderedVector : public Vector<T>{
             int high = this->size-1; //array pos is size-1
             int mid = 0; //to be set immediately
             
+            if(high<0){ return -1; }
+            
             if(*n<*this->data[low] or *n>*this->data[high])
             {
                 return -1;
