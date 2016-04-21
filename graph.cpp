@@ -48,8 +48,19 @@ void Graph::addEdge(std::string from, std::string to)
 	}
 }
 
+std::string Graph::getName()
+{
+	return m_name;
+}
+
+void Graph::setName(std::string name)
+{
+	m_name = name;
+}
+
 void Graph::printGraph()
 {
+	std::cout << "Graph name: " << this->getName() << endl;
 	if(data.get_size()>0){
 		for(int i=0;i<data.get_size();i++){
 			std::cout << "Node: " << *data.at(i) << endl;
@@ -61,6 +72,6 @@ void Graph::printGraph()
 			}
 		}
 	} else {
-		cout << "Empty graph." << endl;
+		cout << "No nodes." << endl;
 	}
 }
