@@ -53,6 +53,19 @@ void Vertex::setName(string name)
 }
 
 /**
+ * Other setter/getter
+ */
+void Vertex::setColor(Color color)
+{
+	m_color = color;
+}
+
+Vertex::Color Vertex::getColor()
+{
+	return m_color;
+}
+
+/**
  * order relation
  */
 bool Vertex::operator> (Vertex &y)

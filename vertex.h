@@ -10,6 +10,8 @@ class Vertex {
         std::string m_name;
         OrderedVector<Vertex *> outgoing_edges;
         OrderedVector<Vertex *> ingoing_edges;
+        enum Color { white, gray, orange };
+        Color m_color = white;
     
     public:
         Vertex();
@@ -21,6 +23,8 @@ class Vertex {
         OrderedVector<Vertex *> getIngoing();
         std::string getName() const;
         void setName(string name);
+        void setColor(Color color);
+		Color getColor();
         
         //define an order relation between vertex objects
         bool operator> (Vertex &y);

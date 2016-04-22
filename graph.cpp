@@ -60,18 +60,20 @@ void Graph::setName(std::string name)
 
 void Graph::printGraph()
 {
-	std::cout << "Graph name: " << this->getName() << endl;
+	std::cout << "digraph " << this->getName() << " {" << endl;
 	if(data.get_size()>0){
 		for(int i=0;i<data.get_size();i++){
-			std::cout << "Node: " << *data.at(i) << endl;
+			std::cout << "    " << (*data.at(i)).getName() << ";" << endl;
 			for(int j=0;j<(*data.at(i)).getOutgoing().get_size();j++){
-				std::cout << "      " << " -> " << *(*data.at(i)).getOutgoing().at(j) << endl;
+				std::cout << "    " << (*data.at(i)).getName() << " -> " << (*(*data.at(i)).getOutgoing().at(j)).getName() << ";" << endl;
 			}
+			// uncomment for bidirectional print
+			/*
 			for(int j=0;j<(*data.at(i)).getIngoing().get_size();j++){
-				std::cout << "      " << " <- " << *(*data.at(i)).getIngoing().at(j) << endl;
+				std::cout << "    " << (*(*data.at(i)).getIngoing().at(j)).getName() << " -> " << (*data.at(i)).getName() << ";" << endl;
 			}
+			*/
 		}
-	} else {
-		cout << "No nodes." << endl;
 	}
+	std::cout << "}" << endl;
 }
