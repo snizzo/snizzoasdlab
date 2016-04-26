@@ -16,6 +16,7 @@ class Vertex {
     public:
         Vertex();
         Vertex(string name);
+        ~Vertex();
         
         void addIngoing(Vertex * v);
         void addOutgoing(Vertex * v);

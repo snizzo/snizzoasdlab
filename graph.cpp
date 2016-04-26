@@ -1,16 +1,27 @@
 #include "graph.h"
+#include "utils.h"
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
+#include <sstream>
+#include <cmath>
 
 using namespace std;
 
-void Graph::addVertex(std::string name)
+int Graph::getSizeNodes()
+{
+	return data.get_size();
+}
+
+bool Graph::addVertex(std::string name)
 {
 	//avoid duplicates
 	if(data.find(new Vertex(name))==-1){
 		Vertex * v = new Vertex(name);
 		this->data.add(v);
+		return true;
+	} else {
+		return false;
 	}
 }
 
@@ -48,6 +59,27 @@ void Graph::addEdge(std::string from, std::string to)
 	}
 }
 
+void Graph::addEdge(int from, int to)
+{
+	Vertex * vfrom = NULL;
+	Vertex * vto = NULL;
+	
+	if(from >= 0){
+		vfrom = data.at(from);
+	}
+	
+	if(to >= 0){
+		vto = data.at(to);
+	}
+	
+	if(vfrom!=NULL && vto!=NULL){
+		vfrom->addOutgoing(vto);
+		vto->addIngoing(vfrom);
+	} else {
+		std::cout << "WARNING: can't find node" << endl;
+	}
+}
+
 std::string Graph::getName()
 {
 	return m_name;
@@ -76,4 +108,42 @@ void Graph::printGraph()
 		}
 	}
 	std::cout << "}" << endl;
+}
+
+/**
+ * Generates a random graph with number of nodes = nodes
+ * @param n number of nodes
+ * @return random graph
+ */
+Graph * Graph::generateRandomGraph(int nodes)
+{
+	//new graph
+	Graph * test = new Graph();
+	//setting initial seed
+	Utils::setSeed();
+	
+	//generating random nodes
+	for (int i=0; i<nodes; i++) {
+		double rand = Utils::random();
+		std::ostringstream strs; strs << rand; std::string name = strs.str();
+		if(!test->addVertex(name)){
+			i--;
+		}
+	}
+	
+	//generating random edges
+	for (int i=0; i < (pow(nodes, 2))/5; i++) {
+		int n1 = (floor(Utils::random() * (nodes-1) + 0.5));
+		int n2 = (floor(Utils::random() * (nodes-1) + 0.5));
+		
+		if (n1!=n2) {
+			test->addEdge(n1,n2);
+		} else {
+			i-=1;
+		}
+	}
+	
+	cout << "Generated random graph with " << nodes << " nodes" << endl;
+	
+	return test;
 }

@@ -15,15 +15,20 @@ class Graph{
 		std::string m_name;
     public:
 		//internal structure modifiers 
-        void addVertex(std::string name);
+        bool addVertex(std::string name);
         void addEdge(std::string from, std::string to);
+        void addEdge(int from, int to);
         
         //setters getters
         std::string getName();
         void setName(std::string name);
+        int getSizeNodes();
         
         //debugging
         void printGraph();
+        
+        //static methods
+        static Graph * generateRandomGraph(int nodes);
 };
 
 #endif

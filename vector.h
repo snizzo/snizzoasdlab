@@ -31,6 +31,11 @@ template <class T> class Vector{
             this->data = (T *) realloc(this->data, sizeof(T)*this->memsize);
         }
         
+        ~Vector()
+        {
+			free(this->data);
+		}
+        
         /**
          * Can enable or disable automatic memory realloc.
          * USE THIS WITH CAUTION, CAN LEAD TO SEGFAULT!!!
