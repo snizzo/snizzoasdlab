@@ -14,6 +14,8 @@ class Graph{
 		OrderedVector<Vertex *> data;
 		std::string m_name;
     public:
+		//constructor/destructor
+		~Graph();
 		//internal structure modifiers 
         bool addVertex(std::string name);
         void addEdge(std::string from, std::string to);

@@ -2,6 +2,7 @@
 #include <ctime>
 #include "utils.h"
 #include "graph.h"
+#include "assert.h"
 
 double Utils::m_seed = 0.0;
 
@@ -57,11 +58,15 @@ int Utils::calcolaRipTara(int d, double tMin)
 	
 	while (t1-t0 <= tMin) {
 		rip = rip*2; 								// stima di rip con crescita esponenziale
+		Graph * list[rip];
 		t0 = clock();
 		for (i=0;i<rip;i++) {
-			Graph * test = Graph::generateRandomGraph(d);
+			list[i] = Graph::generateRandomGraph(d);
 		}
 		t1 = clock();
+		for(int j=0;j<rip;j++){
+			delete list[j];
+		}
 	}
 	// ricerca esatta del numero di ripetizioni per bisezione
 	// approssimiamo a 5 cicli
@@ -70,11 +75,15 @@ int Utils::calcolaRipTara(int d, double tMin)
 	int cicliErrati = 5;
 	while (max-min >= cicliErrati) {
 		rip = (max + min)/2; 						// valore mediano
+		Graph * list[rip];
 		t0 = clock();
 		for (i=0;i<rip;i++) {
-			Graph * test = Graph::generateRandomGraph(d);
+			list[i] = Graph::generateRandomGraph(d);
 		}
 		t1 = clock();
+		for(int j=0;j<rip;j++){
+			delete list[j];
+		}
 		if (((double)(t1-t0))/CLOCKS_PER_SEC <= tMin) {
 			min = rip;
 		} else {
@@ -93,13 +102,23 @@ int Utils::calcolaRipLordo(int d, double tMin)
 	clock_t t1 = 0;
 	
 	while (t1-t0 <= tMin) {
-		rip = rip*2; 								// stima di rip con crescita esponenziale
+		rip = rip*2;							// stima di rip con crescita esponenziale
+		Graph * list[rip];
 		t0 = clock();
 		for (i=0;i<rip;i++) {
-			Graph * test = Graph::generateRandomGraph(d);
+			list[i] = Graph::generateRandomGraph(d);
+			//Graph * test1 = Graph::generateRandomGraph(d);
+			//delete test1;
 			//execute((int *)e, d);
 		}
 		t1 = clock();
+		
+		//clearing data
+		for(int j=0;j<rip;j++)
+		{
+			delete list[j];
+		}
+		
 	}
 	// ricerca esatta del numero di ripetizioni per bisezione
 	// approssimiamo a 5 cicli
@@ -108,12 +127,22 @@ int Utils::calcolaRipLordo(int d, double tMin)
 	int cicliErrati = 5;
 	while (max-min >= cicliErrati) {
 		rip = (max + min)/2; 						// valore mediano
+		Graph * list[rip];
 		t0 = clock();
 		for (i=0;i<rip;i++) {
-			Graph * test = Graph::generateRandomGraph(d);
+			list[i] = Graph::generateRandomGraph(d);
+			//Graph * test1 = Graph::generateRandomGraph(d);
+			//delete test1;
 			//execute((int *)e, d);
 		}
 		t1 = clock();
+		
+		//clearing data
+		for(int j=0;j<rip;j++)
+		{
+			delete list[j];
+		}
+		
 		if (((double)(t1-t0))/CLOCKS_PER_SEC <= tMin) {
 			min = rip;
 		} else {
@@ -133,22 +162,46 @@ double Utils::tempoMedioNetto(int d, double tMin)
 	clock_t t0 = 0;
 	clock_t t1 = 0;
 	
+	Graph * list[ripTara];
 	t0 = clock();
 	for (i=0;i<ripTara;i++) {
-		Graph * test = Graph::generateRandomGraph(d);
+		list[i] = Graph::generateRandomGraph(d);
 	}
 	t1 = clock();
+	
+	//clearing data
+	for(int j=0;j<ripTara;j++)
+	{
+		delete list[j];
+	}
+	
 	double ttara = ((double)(t1-t0))/CLOCKS_PER_SEC;
 	
+	Graph * list2[ripLordo];
 	t0 = clock();
 	for (i=0;i<ripLordo;i++) {
-		Graph * test = Graph::generateRandomGraph(d);
+		list2[i] = Graph::generateRandomGraph(d);
+		//Graph * test1 = Graph::generateRandomGraph(d);
+		//delete test1;
 		//execute((int *)e, d);
 	}
 	t1 = clock();
+	
+	//clearing data
+	for(int j=0;j<ripLordo;j++)
+	{
+		delete list2[j];
+	}
+	
 	double tlordo = ((double)(t1-t0))/CLOCKS_PER_SEC;
 	
+	//cout << "clock2: " << t0 << " " << t1 << endl;
+	
 	double tmedio = tlordo/(double)ripLordo - ttara/(double)ripTara;
+	
+	//cout << "tempi: " << tmedio << " " << tlordo << " " << ttara << endl;
+	
+	//assert(tmedio>0);
 	
 	return tmedio;
 }

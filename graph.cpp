@@ -8,6 +8,13 @@
 
 using namespace std;
 
+Graph::~Graph()
+{
+	for(int i=0;i<this->data.get_size();i++){
+		delete this->data.at(i);
+	}
+}
+
 int Graph::getSizeNodes()
 {
 	return data.get_size();
@@ -15,8 +22,9 @@ int Graph::getSizeNodes()
 
 bool Graph::addVertex(std::string name)
 {
+	Vertex search(name);
 	//avoid duplicates
-	if(data.find(new Vertex(name))==-1){
+	if(data.find(&search)==-1){
 		Vertex * v = new Vertex(name);
 		this->data.add(v);
 		return true;
@@ -27,11 +35,14 @@ bool Graph::addVertex(std::string name)
 
 void Graph::addEdge(std::string from, std::string to)
 {
+	Vertex search_from(from);
+	Vertex search_to(to);
+	
 	Vertex * vfrom = NULL;
 	Vertex * vto = NULL;
 	
-	int at_from = data.find(new Vertex(from));
-	int at_to = data.find(new Vertex(to));
+	int at_from = data.find(&search_from);
+	int at_to = data.find(&search_to);
 	
 	if(at_from >= 0){
 		vfrom = data.at(at_from);
@@ -47,8 +58,8 @@ void Graph::addEdge(std::string from, std::string to)
 		data.add(vto);
 	}
 	
-	vfrom = data.at(data.find(new Vertex(from)));
-	vto = data.at(data.find(new Vertex(to)));
+	vfrom = data.at(data.find(&search_from));
+	vto = data.at(data.find(&search_to));
 	
 	
 	if(vfrom!=NULL && vto!=NULL){
@@ -142,8 +153,6 @@ Graph * Graph::generateRandomGraph(int nodes)
 			i-=1;
 		}
 	}
-	
-	cout << "Generated random graph with " << nodes << " nodes" << endl;
 	
 	return test;
 }

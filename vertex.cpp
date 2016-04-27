@@ -11,6 +11,11 @@ Vertex::Vertex()
 {
 }
 
+Vertex::~Vertex()
+{
+	
+}
+
 /**
  * Vertex connection representation
  */
