@@ -19,7 +19,8 @@ int main(int argc, char* argv[])
 	*/
 	
 	while(true){
-		Graph::generateRandomGraph(100);
+		Graph * test = Graph::generateRandomGraph(100);
+		//delete test;
 	}
 	
 	/*
