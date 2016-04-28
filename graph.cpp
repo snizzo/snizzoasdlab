@@ -13,6 +13,7 @@ Graph::~Graph()
 	for(int i=0;i<this->data.get_size();i++){
 		delete this->data.at(i);
 	}
+	this->data.release_memory();
 }
 
 int Graph::getSizeNodes()

@@ -33,7 +33,7 @@ template <class T> class Vector{
         
         ~Vector()
         {
-			free(this->data);
+			//free(this->data);
 		}
         
         /**
@@ -46,6 +46,16 @@ template <class T> class Vector{
         {
             this->allow_automatic_realloc = value;
         }
+        
+        /**
+         * Manully releases memory. Call before destruction
+         * instead of normal destructor. Apparently destructor
+         * is called during output print for no reason.
+         */
+        void release_memory()
+        {
+			free(this->data);
+		}
         
         /**
          * Performance fristd::endly vector resize.

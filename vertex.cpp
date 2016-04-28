@@ -7,13 +7,15 @@ using namespace std;
 /*
  * Empty constructor
  */
-Vertex::Vertex()
+Vertex::Vertex(): outgoing_edges()
+, ingoing_edges()
 {
 }
 
 Vertex::~Vertex()
 {
-	
+	this->outgoing_edges.release_memory();
+	this->ingoing_edges.release_memory();
 }
 
 /**
