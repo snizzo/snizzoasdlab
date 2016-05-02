@@ -6,6 +6,7 @@
 #include "queue.h"
 #include "orderedvector.h"
 #include "vertex.h"
+#include "edge.h"
 
 using namespace std;
 
@@ -25,12 +26,15 @@ class Graph{
         std::string getName();
         void setName(std::string name);
         int getSizeNodes();
+        OrderedVector<Vertex *> * getNodes();
+        Vertex * getFirstWhite();
         
         //debugging
         void printGraph();
         
         //static methods
         static Graph * generateRandomGraph(int nodes);
+        static int minimumEdgesNeededToRoot(Graph * g);
 };
 
 #endif

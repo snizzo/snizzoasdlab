@@ -82,7 +82,7 @@ void Parser::tokenize()
 	//receiving input
 	for (std::string line; std::getline(std::cin, line);) {
 		for(char& c : line) {
-			if(c == ' ' or c == '>'){
+			if(c == ' ' or c == '>' or c == '\t'){
 				if(!buffer.empty()){
 					Token * t = new Token(buffer);
 					this->tokens.add(t);

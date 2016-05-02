@@ -12,8 +12,12 @@
 int main(int argc, char* argv[])
 {
 	Parser p;
-	Graph * rec = p.buildGraphFromStdin();
-	rec->printGraph();
+	Graph * g = p.buildGraphFromStdin();
+	g->printGraph();
+	
+	cout << Graph::minimumEdgesNeededToRoot(g) << endl;
+	
+	g->printGraph();
 	
 	/*
 	Graph g;

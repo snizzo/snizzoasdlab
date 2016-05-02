@@ -12,16 +12,9 @@
 
 int main(int argc, char* argv[])
 {	
-	/*
 	double gran = Utils::granularity();
 	double tMin = 20*gran;
 	Utils::misurazione(100, tMin);
-	*/
-	
-	while(true){
-		Graph * test = Graph::generateRandomGraph(100);
-		//delete test;
-	}
 	
 	/*
 	Graph g;

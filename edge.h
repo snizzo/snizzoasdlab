@@ -3,26 +3,41 @@
 
 #include <cstdlib>
 #include <cstring>
-#include "graph.h"
 #include "vertex.h"
 
-using namespace std;
+class Vertex;
 
 class Edge {
+	public:
+		enum Style { solid, dashed };
+		enum Color { black, red };
+		
     private:
-        Vertex * m_from;
         Vertex * m_to;
+        Style m_style;
+        Color m_color;
     
     public:
         Edge();
-        Edge(Vertex * from, Vertex * to);
-        
-        void setFrom(Vertex * from);
-        Vertex * getFrom();
+        Edge(Vertex * to);
+        Edge(Vertex * to, Edge::Style s, Edge::Color c);
         void setTo(Vertex * to);
         Vertex * getTo();
         
-        string toString();
+        //setter-getter
+        void setColor(Color c);
+        void setStyle(Style s);
+        Color getColor();
+        Style getStyle();
+        
+		//define an order relation between Edge objects
+        bool operator> (Edge &y);
+        bool operator< (Edge &y);
+        bool operator== (Edge &y);
+        bool operator<= (Edge &y);
+        bool operator>= (Edge &y);
+        bool operator!= (Edge &y);
+        friend std::ostream& operator<< (std::ostream &os, Edge const &m);
 };
 
 #endif

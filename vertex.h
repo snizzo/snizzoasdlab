@@ -4,13 +4,19 @@
 #include <cstdlib>
 #include <cstring>
 #include "orderedvector.h"
+#include "edge.h"
+
+class Edge;
 
 class Vertex {
+	public:
+		enum Color { white, orange, gray };
+	
     private:
         std::string m_name;
-        OrderedVector<Vertex *> outgoing_edges;
-        OrderedVector<Vertex *> ingoing_edges;
-        enum Color { white, gray, orange };
+        std::string label;
+        OrderedVector<Edge *> outgoing_edges;
+        OrderedVector<Edge *> ingoing_edges;
         Color m_color = white;
     
     public:
@@ -20,12 +26,14 @@ class Vertex {
         
         void addIngoing(Vertex * v);
         void addOutgoing(Vertex * v);
-        OrderedVector<Vertex *> getOutgoing();
-        OrderedVector<Vertex *> getIngoing();
+        OrderedVector<Edge *> getOutgoing();
+        OrderedVector<Edge *> getIngoing();
         std::string getName() const;
         void setName(string name);
         void setColor(Color color);
-		Color getColor();
+		Color getColor() const;
+		void setLabel(std::string s);
+		std::string getLabel();
         
         //define an order relation between vertex objects
         bool operator> (Vertex &y);

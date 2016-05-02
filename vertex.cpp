@@ -23,20 +23,20 @@ Vertex::~Vertex()
  */
 void Vertex::addIngoing(Vertex * v)
 {
-	this->ingoing_edges.add(v);
+	this->ingoing_edges.add(new Edge(v));
 }
 
 void Vertex::addOutgoing(Vertex * v)
 {
-	this->outgoing_edges.add(v);
+	this->outgoing_edges.add(new Edge(v));
 }
 
-OrderedVector<Vertex *> Vertex::getOutgoing()
+OrderedVector<Edge *> Vertex::getOutgoing()
 {
 	return outgoing_edges;
 }
 
-OrderedVector<Vertex *> Vertex::getIngoing()
+OrderedVector<Edge *> Vertex::getIngoing()
 {
 	return ingoing_edges;
 }
@@ -59,6 +59,16 @@ void Vertex::setName(string name)
     m_name = name;
 }
 
+void Vertex::setLabel(std::string s)
+{
+	this->label = s;
+}
+
+std::string Vertex::getLabel()
+{
+	return this->label;
+}
+
 /**
  * Other setter/getter
  */
@@ -67,7 +77,7 @@ void Vertex::setColor(Color color)
 	m_color = color;
 }
 
-Vertex::Color Vertex::getColor()
+Vertex::Color Vertex::getColor() const
 {
 	return m_color;
 }
@@ -134,6 +144,6 @@ bool Vertex::operator!= (Vertex &y)
 
 std::ostream& operator<< (std::ostream &os, Vertex const &m)
 {
-    return os << "(Vertex:"<<m.getName()<<")";
+    return os << "(Vertex:"<<m.getName()<< " " << m.getColor() <<")";
 }
 

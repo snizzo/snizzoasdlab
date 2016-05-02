@@ -28,12 +28,17 @@ template <class T> class Vector{
             this->size = 0;
             this->memsize = 0;
             this->allow_automatic_realloc = true;
-            this->data = (T *) realloc(this->data, sizeof(T)*this->memsize);
+            this->init();
         }
         
         ~Vector()
         {
 			//free(this->data);
+		}
+        
+        void init()
+        {
+			this->data = (T *) realloc(this->data, sizeof(T)*this->memsize);
 		}
         
         /**
@@ -55,6 +60,12 @@ template <class T> class Vector{
         void release_memory()
         {
 			free(this->data);
+		}
+        
+        void clear()
+        {
+			release_memory();
+			this->init();
 		}
         
         /**

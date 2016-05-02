@@ -1,5 +1,6 @@
 #include "graph.h"
 #include "utils.h"
+#include "queue.h"
 #include <cstdio>
 #include <cstdlib>
 #include <iostream>
@@ -14,6 +15,11 @@ Graph::~Graph()
 		delete this->data.at(i);
 	}
 	this->data.release_memory();
+}
+
+OrderedVector<Vertex *> * Graph::getNodes()
+{
+	return &this->data;
 }
 
 int Graph::getSizeNodes()
@@ -107,9 +113,25 @@ void Graph::printGraph()
 	std::cout << "digraph " << this->getName() << " {" << endl;
 	if(data.get_size()>0){
 		for(int i=0;i<data.get_size();i++){
-			std::cout << "    " << (*data.at(i)).getName() << ";" << endl;
+			std::cout << "    " << (*data.at(i)).getName() << " " << (*data.at(i)).getColor() << ";" << endl;
 			for(int j=0;j<(*data.at(i)).getOutgoing().get_size();j++){
-				std::cout << "    " << (*data.at(i)).getName() << " -> " << (*(*data.at(i)).getOutgoing().at(j)).getName() << ";" << endl;
+				
+				Edge * current = (*data.at(i)).getOutgoing().at(j);
+				
+				std::cout << "    " << (*data.at(i)).getName() << " -> " << current->getTo()->getName();
+				
+				if(current->getStyle()==Edge::Style::dashed && current->getColor()!=Edge::Color::red){
+					std::cout << " [style=dashed]";
+				}
+				
+				if(current->getStyle()==Edge::Style::dashed && current->getColor()==Edge::Color::red){
+					std::cout << " [style=dashed,color=red]";
+				}
+				
+				if(current->getStyle()==Edge::Style::solid && current->getColor()==Edge::Color::red){
+					std::cout << " [color=red]";
+				}
+				std::cout << ";" << endl;
 			}
 			// uncomment for bidirectional print
 			/*
@@ -156,4 +178,58 @@ Graph * Graph::generateRandomGraph(int nodes)
 	}
 	
 	return test;
+}
+
+Vertex * Graph::getFirstWhite()
+{
+	for(int i=0;i<this->data.get_size();i++){
+		Vertex * current = this->data.at(i);
+		if(current->getColor()==Vertex::Color::white){
+			return current;
+		}
+	}
+	
+	return NULL;
+}
+
+/**
+ * Static method for finding minimum number of edges
+ * to be added needed to have a root node in the graph. 
+ */
+int Graph::minimumEdgesNeededToRoot(Graph * g)
+{
+	int edges = 0;
+	//graph is empty
+	if(g->getSizeNodes()<1){
+		return 0;
+	}
+	
+	Queue<Vertex *> * q = new Queue<Vertex *>();
+	
+	while(true){
+		Vertex * start = g->getFirstWhite();
+		
+		//checks
+		if(start==NULL){ return edges; }
+		
+		start->setColor(Vertex::Color::orange);
+		
+		q->enqueue(start);
+		
+		while(!q->empty()){
+			Vertex * t = q->dequeue();
+			OrderedVector<Edge *> out = t->getOutgoing();
+			for(int i=0;i<out.get_size();i++){
+				Vertex * current_node = out.at(i)->getTo();
+				if(current_node->getColor() == Vertex::Color::white){
+					current_node->setColor(Vertex::Color::gray);
+					q->enqueue(current_node);
+				} else {
+					if(current_node != start){
+						current_node->setColor(Vertex::Color::gray);
+					}
+				}
+			}
+		}
+	}
 }
