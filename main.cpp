@@ -13,9 +13,10 @@ int main(int argc, char* argv[])
 {
 	Parser p;
 	Graph * g = p.buildGraphFromStdin();
-	g->printGraph();
 	
-	cout << Graph::minimumEdgesNeededToRoot(g) << endl;
+	//also add red dashed edges for nodes added to make graph
+	//have a root node
+	Graph::minimumEdgesNeededToRoot(g);
 	
 	g->printGraph();
 	

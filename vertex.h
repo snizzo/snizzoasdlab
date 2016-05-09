@@ -26,6 +26,7 @@ class Vertex {
         
         void addIngoing(Vertex * v);
         void addOutgoing(Vertex * v);
+        void addOutgoing(Vertex * v, Edge::Color c, Edge::Style s);
         OrderedVector<Edge *> getOutgoing();
         OrderedVector<Edge *> getIngoing();
         std::string getName() const;

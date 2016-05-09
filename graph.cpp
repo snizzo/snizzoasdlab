@@ -113,7 +113,7 @@ void Graph::printGraph()
 	std::cout << "digraph " << this->getName() << " {" << endl;
 	if(data.get_size()>0){
 		for(int i=0;i<data.get_size();i++){
-			std::cout << "    " << (*data.at(i)).getName() << " " << (*data.at(i)).getColor() << ";" << endl;
+			std::cout << "    " << (*data.at(i)).getName() << /* " " << (*data.at(i)).getColor() << */";" << endl; //remove comment to print vertex color for dfs
 			for(int j=0;j<(*data.at(i)).getOutgoing().get_size();j++){
 				
 				Edge * current = (*data.at(i)).getOutgoing().at(j);
@@ -193,6 +193,23 @@ Vertex * Graph::getFirstWhite()
 }
 
 /**
+ * When found, the orange node becomes gray
+ * @return Vertex * if found, else NULL
+ */
+Vertex * Graph::getFirstOrangeAndRecolor()
+{
+	for(int i=0;i<this->data.get_size();i++){
+		Vertex * current = this->data.at(i);
+		if(current->getColor()==Vertex::Color::orange){
+			current->setColor(Vertex::Color::gray);
+			return current;
+		}
+	}
+	
+	return NULL;
+}
+
+/**
  * Static method for finding minimum number of edges
  * to be added needed to have a root node in the graph. 
  */
@@ -210,7 +227,7 @@ int Graph::minimumEdgesNeededToRoot(Graph * g)
 		Vertex * start = g->getFirstWhite();
 		
 		//checks
-		if(start==NULL){ return edges; }
+		if(start==NULL){ break; }
 		
 		start->setColor(Vertex::Color::orange);
 		
@@ -231,5 +248,22 @@ int Graph::minimumEdgesNeededToRoot(Graph * g)
 				}
 			}
 		}
+	}
+	
+	Vertex * root = g->getFirstOrangeAndRecolor();
+	
+	//no more oranges on the graph
+	if(root==NULL){
+		return edges;
+	}
+	
+	while(true){
+		Vertex * found = g->getFirstOrangeAndRecolor();
+		
+		if(found==NULL){
+			return edges;
+		}
+		edges += 1;
+		root->addOutgoing(found, Edge::Color::red, Edge::Style::dashed);
 	}
 }

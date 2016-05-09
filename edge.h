@@ -3,7 +3,6 @@
 
 #include <cstdlib>
 #include <cstring>
-#include "vertex.h"
 
 class Vertex;
 
@@ -39,5 +38,7 @@ class Edge {
         bool operator!= (Edge &y);
         friend std::ostream& operator<< (std::ostream &os, Edge const &m);
 };
+
+#include "vertex.h"
 
 #endif

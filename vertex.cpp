@@ -31,6 +31,11 @@ void Vertex::addOutgoing(Vertex * v)
 	this->outgoing_edges.add(new Edge(v));
 }
 
+void Vertex::addOutgoing(Vertex * v, Edge::Color c, Edge::Style s)
+{
+	this->outgoing_edges.add(new Edge(v,s,c));
+}
+
 OrderedVector<Edge *> Vertex::getOutgoing()
 {
 	return outgoing_edges;

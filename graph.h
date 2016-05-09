@@ -28,6 +28,7 @@ class Graph{
         int getSizeNodes();
         OrderedVector<Vertex *> * getNodes();
         Vertex * getFirstWhite();
+        Vertex * getFirstOrangeAndRecolor();
         
         //debugging
         void printGraph();
