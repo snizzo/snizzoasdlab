@@ -108,6 +108,16 @@ void Graph::setName(std::string name)
 	m_name = name;
 }
 
+Vertex * Graph::getRoot()
+{
+	return this->root;
+}
+
+void Graph::setRoot(Vertex * v)
+{
+	this->root = v;
+}
+
 void Graph::printGraph()
 {
 	std::cout << "digraph " << this->getName() << " {" << endl;
@@ -209,6 +219,51 @@ Vertex * Graph::getFirstOrangeAndRecolor()
 	return NULL;
 }
 
+void Graph::setAllColorsTo(Vertex::Color c)
+{
+	for(int i=0;i<this->data.get_size();i++){
+		Vertex * current = this->data.at(i);
+		current->setColor(Vertex::Color::white);
+	}
+}
+
+void Graph::generateShortestPathTree(Graph * g)
+{
+	if(g->getSizeNodes()<1){
+		return;
+	}
+	
+	g->setAllColorsTo(Vertex::Color::white);
+	Queue<Vertex *> * q = new Queue<Vertex *>();
+	
+	while(true){
+		Vertex * start = g->getRoot();
+		
+		//checks
+		if(start==NULL){ break; }
+		
+		q->enqueue(start);
+		
+		while(!q->empty()){
+			Vertex * t = q->dequeue();
+			OrderedVector<Edge *> out = t->getOutgoing();
+			for(int i=0;i<out.get_size();i++){
+				Vertex * current_node = out.at(i)->getTo();
+				if(current_node->getColor() == Vertex::Color::white){
+					out.at(i)->setStyle(Edge::Style::dashed);
+					current_node->setColor(Vertex::Color::gray);
+					q->enqueue(current_node);
+				} else {
+					if(current_node != start){
+						current_node->setColor(Vertex::Color::gray);
+					}
+				}
+			}
+		}
+		break;
+	}
+}
+
 /**
  * Static method for finding minimum number of edges
  * to be added needed to have a root node in the graph. 
@@ -251,6 +306,7 @@ int Graph::minimumEdgesNeededToRoot(Graph * g)
 	}
 	
 	Vertex * root = g->getFirstOrangeAndRecolor();
+	g->setRoot(root);
 	
 	//no more oranges on the graph
 	if(root==NULL){

@@ -17,6 +17,7 @@ int main(int argc, char* argv[])
 	//also add red dashed edges for nodes added to make graph
 	//have a root node
 	Graph::minimumEdgesNeededToRoot(g);
+	Graph::generateShortestPathTree(g);
 	
 	g->printGraph();
 	

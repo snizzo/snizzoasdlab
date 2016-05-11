@@ -12,6 +12,7 @@ using namespace std;
 
 class Graph{
 	private:
+		Vertex * root = NULL;
 		OrderedVector<Vertex *> data;
 		std::string m_name;
     public:
@@ -21,6 +22,8 @@ class Graph{
         bool addVertex(std::string name);
         void addEdge(std::string from, std::string to);
         void addEdge(int from, int to);
+        Vertex * getRoot();
+		void setRoot(Vertex * v);
         
         //setters getters
         std::string getName();
@@ -29,6 +32,7 @@ class Graph{
         OrderedVector<Vertex *> * getNodes();
         Vertex * getFirstWhite();
         Vertex * getFirstOrangeAndRecolor();
+        void setAllColorsTo(Vertex::Color c);
         
         //debugging
         void printGraph();
@@ -36,6 +40,7 @@ class Graph{
         //static methods
         static Graph * generateRandomGraph(int nodes);
         static int minimumEdgesNeededToRoot(Graph * g);
+        static void generateShortestPathTree(Graph * g);
 };
 
 #endif
