@@ -3,5 +3,7 @@ digraph G1 {
     a -> e;
     a -> f;
     f -> b;
+    e -> f;
+    f -> c;
     g;
 }

@@ -265,6 +265,7 @@ void Graph::generateShortestPathTree(Graph * g)
 		if(start==NULL){ break; }
 		
 		start->setDistance(0);
+		start->setColor(Vertex::Color::gray);
 		q->enqueue(start);
 		
 		while(!q->empty()){
