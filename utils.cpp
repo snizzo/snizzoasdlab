@@ -109,7 +109,8 @@ int Utils::calcolaRipLordo(int d, double tMin)
 			list[i] = Graph::generateRandomGraph(d);
 			//Graph * test1 = Graph::generateRandomGraph(d);
 			//delete test1;
-			//execute((int *)e, d);
+			Graph::minimumEdgesNeededToRoot(list[i]);
+			Graph::generateShortestPathTree(list[i]);
 		}
 		t1 = clock();
 		
@@ -133,7 +134,8 @@ int Utils::calcolaRipLordo(int d, double tMin)
 			list[i] = Graph::generateRandomGraph(d);
 			//Graph * test1 = Graph::generateRandomGraph(d);
 			//delete test1;
-			//execute((int *)e, d);
+			Graph::minimumEdgesNeededToRoot(list[i]);
+			Graph::generateShortestPathTree(list[i]);
 		}
 		t1 = clock();
 		
@@ -183,7 +185,8 @@ double Utils::tempoMedioNetto(int d, double tMin)
 		list2[i] = Graph::generateRandomGraph(d);
 		//Graph * test1 = Graph::generateRandomGraph(d);
 		//delete test1;
-		//execute((int *)e, d);
+		Graph::minimumEdgesNeededToRoot(list2[i]);
+		Graph::generateShortestPathTree(list2[i]);
 	}
 	t1 = clock();
 	
