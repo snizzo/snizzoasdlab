@@ -1,7 +1,7 @@
 digraph G1 {
-    C -> E;
-    A -> E;
-    A -> F;
-    F -> B;
-    G;
+    c -> e;
+    a -> e;
+    a -> f;
+    f -> b;
+    g;
 }
