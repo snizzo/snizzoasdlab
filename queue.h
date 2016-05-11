@@ -19,11 +19,21 @@ template <class T> class Queue {
 			this->data = NULL;
 		}
 
+		/**
+         * Manully releases memory. Call before destruction
+         * instead of normal destructor. Apparently destructor
+         * is called during output print for no reason.
+         */
+        void release_memory()
+        {
+			free(this->data);
+		}
+
 		T at(int pos)
 		{
 			return this->data[pos];
 		}
-
+		
 		bool empty()
 		{
 			if (this->getSize() < 1){

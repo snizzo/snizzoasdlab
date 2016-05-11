@@ -14,7 +14,14 @@ Vertex::Vertex(): outgoing_edges()
 
 Vertex::~Vertex()
 {
+	for(int i=0;i<this->outgoing_edges.get_size();i++){
+		delete this->outgoing_edges.at(i);
+	}
 	this->outgoing_edges.release_memory();
+	
+	for(int i=0;i<this->ingoing_edges.get_size();i++){
+		delete this->ingoing_edges.at(i);
+	}
 	this->ingoing_edges.release_memory();
 }
 

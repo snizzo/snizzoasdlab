@@ -69,7 +69,17 @@ Graph * Parser::buildGraphFromStdin()
 		}
 	}
 	
+	this->release_memory();
+	
     return result;
+}
+
+void Parser::release_memory()
+{
+	for(int i=0;i<this->tokens.get_size();i++){
+		delete this->tokens.at(i);
+	}
+	this->tokens.release_memory();
 }
 
 /**

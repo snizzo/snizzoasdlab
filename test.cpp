@@ -14,7 +14,7 @@ int main(int argc, char* argv[])
 {	
 	double gran = Utils::granularity();
 	double tMin = 20*gran;
-	Utils::misurazione(20, tMin);
+	Utils::misurazione(150, tMin);
 	
 	/*
 	Graph g;

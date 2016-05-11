@@ -21,6 +21,8 @@ class Parser {
 		 * 2 = declarations
 		 */
 		int parse_status = 0;
+		
+		void release_memory();
     public:
 		void tokenize();
         Graph * buildGraphFromFile(string filepath);

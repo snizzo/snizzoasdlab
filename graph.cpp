@@ -288,6 +288,10 @@ void Graph::generateShortestPathTree(Graph * g)
 		}
 		break;
 	}
+	
+	//releasing memory
+	q->release_memory();
+	delete q;
 }
 
 /**
@@ -330,6 +334,10 @@ int Graph::minimumEdgesNeededToRoot(Graph * g)
 			}
 		}
 	}
+	
+	//releasing memory
+	q->release_memory();
+	delete q;
 	
 	Vertex * root = g->getFirstOrangeAndRecolor();
 	g->setRoot(root);

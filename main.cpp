@@ -21,6 +21,8 @@ int main(int argc, char* argv[])
 	
 	g->printGraph();
 	
+	delete g;
+	
 	/*
 	Graph g;
 	g.addEdge("C","E");
