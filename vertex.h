@@ -18,6 +18,8 @@ class Vertex {
         OrderedVector<Edge *> outgoing_edges;
         OrderedVector<Edge *> ingoing_edges;
         Color m_color = white;
+        int distance = -1;
+        Vertex * parent = NULL;
     
     public:
         Vertex();
@@ -35,6 +37,10 @@ class Vertex {
 		Color getColor() const;
 		void setLabel(std::string s);
 		std::string getLabel();
+		void setDistance(int d);
+		int getDistance();
+		void setParent(Vertex * p);
+		Vertex * getParent();
         
         //define an order relation between vertex objects
         bool operator> (Vertex &y);

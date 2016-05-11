@@ -72,6 +72,8 @@ void Graph::addEdge(std::string from, std::string to)
 	if(vfrom!=NULL && vto!=NULL){
 		vfrom->addOutgoing(vto);
 		vto->addIngoing(vfrom);
+		//incrementing edges count
+		this->original_edges += 1;
 	} else {
 		std::cout << "WARNING: can't find node" << endl;
 	}
@@ -118,12 +120,32 @@ void Graph::setRoot(Vertex * v)
 	this->root = v;
 }
 
+void Graph::setRootLabel()
+{	
+	std::ostringstream s;
+	s << (total_edges - original_edges);
+	const std::string difference(s.str());
+	
+	if(this->root!=NULL){
+		this->root->setLabel("root = "+root->getName()+" ; |E'|-|E| = "+difference);
+	}
+}
+
 void Graph::printGraph()
 {
+	//setting fixed label to root node 
+	this->setRootLabel();
+	
 	std::cout << "digraph " << this->getName() << " {" << endl;
 	if(data.get_size()>0){
 		for(int i=0;i<data.get_size();i++){
-			std::cout << "    " << (*data.at(i)).getName() << /* " " << (*data.at(i)).getColor() << */";" << endl; //remove comment to print vertex color for dfs
+			std::cout << "    " << (*data.at(i)).getName();
+			if((*data.at(i)).getLabel().length()>0){
+				std::cout << " [label=\"" << (*data.at(i)).getLabel() << "\"]";
+			} else {
+				std::cout << " [label=\"d(" << this->getRoot()->getName() << "," << (*data.at(i)).getName() << ")=" << (*data.at(i)).getDistance() << "\"]";
+			}
+			std::cout << /* " " << (*data.at(i)).getColor() << */";" << endl; //remove comment to print vertex color for dfs
 			for(int j=0;j<(*data.at(i)).getOutgoing().get_size();j++){
 				
 				Edge * current = (*data.at(i)).getOutgoing().at(j);
@@ -242,6 +264,7 @@ void Graph::generateShortestPathTree(Graph * g)
 		//checks
 		if(start==NULL){ break; }
 		
+		start->setDistance(0);
 		q->enqueue(start);
 		
 		while(!q->empty()){
@@ -250,6 +273,8 @@ void Graph::generateShortestPathTree(Graph * g)
 			for(int i=0;i<out.get_size();i++){
 				Vertex * current_node = out.at(i)->getTo();
 				if(current_node->getColor() == Vertex::Color::white){
+					current_node->setDistance(t->getDistance() + 1);
+					current_node->setParent(t);
 					out.at(i)->setStyle(Edge::Style::dashed);
 					current_node->setColor(Vertex::Color::gray);
 					q->enqueue(current_node);
@@ -313,6 +338,8 @@ int Graph::minimumEdgesNeededToRoot(Graph * g)
 		return edges;
 	}
 	
+	g->total_edges = g->original_edges;
+	
 	while(true){
 		Vertex * found = g->getFirstOrangeAndRecolor();
 		
@@ -321,5 +348,6 @@ int Graph::minimumEdgesNeededToRoot(Graph * g)
 		}
 		edges += 1;
 		root->addOutgoing(found, Edge::Color::red, Edge::Style::dashed);
+		g->total_edges += 1;
 	}
 }

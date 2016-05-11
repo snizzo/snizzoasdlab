@@ -16,6 +16,8 @@ class Graph{
 		OrderedVector<Vertex *> data;
 		std::string m_name;
     public:
+		int original_edges = 0;
+		int total_edges = 0;
 		//constructor/destructor
 		~Graph();
 		//internal structure modifiers 
@@ -24,6 +26,7 @@ class Graph{
         void addEdge(int from, int to);
         Vertex * getRoot();
 		void setRoot(Vertex * v);
+		void setRootLabel();
         
         //setters getters
         std::string getName();

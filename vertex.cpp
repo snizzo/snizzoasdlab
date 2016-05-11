@@ -64,9 +64,15 @@ void Vertex::setName(string name)
     m_name = name;
 }
 
+/**
+ * For the purpose of this program, label can be assigned only once
+ * to prevent root to be assigned
+ */
 void Vertex::setLabel(std::string s)
 {
-	this->label = s;
+	if(this->label.length()==0){
+		this->label = s;
+	}
 }
 
 std::string Vertex::getLabel()
@@ -85,6 +91,26 @@ void Vertex::setColor(Color color)
 Vertex::Color Vertex::getColor() const
 {
 	return m_color;
+}
+
+void Vertex::setDistance(int d)
+{
+	this->distance = d;
+}
+
+int Vertex::getDistance()
+{
+	return this->distance;
+}
+
+void Vertex::setParent(Vertex * p)
+{
+	this->parent = p;
+}
+
+Vertex * Vertex::getParent()
+{
+	return this->parent;
 }
 
 /**
